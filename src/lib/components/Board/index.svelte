@@ -2,8 +2,12 @@
 	import {onMount} from 'svelte';
 
 	import Tile from './Tile.svelte';
-	import {ChessBoardRow} from '../../types/enum/chess-board-row.enum';
-	import {ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
+	import {CHESS_BOARD_ROWS, ChessBoardRow} from '../../types/enum/chess-board-row.enum';
+	import {CHESS_BOARD_COLUMNS, ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
+	import {CHESS_PIECE_COLORS} from '../../types/enum/chess-piece-color.enum';
+	import {CHESS_PIECE_TYPES} from '../../types/enum/chess-piece-type.enum';
+	import Piece from './Piece.svelte';
+	import ExtraPiece from './ExtraPiece.svelte';
 
 	let container: HTMLDivElement;
 	let rect: DOMRect;
@@ -17,16 +21,27 @@
 	}
 </script>
 
-<div id="board-container" bind:this={container}>
-	<div id="board-boarder">
-		<div id="board">
-			{#each Object.values(ChessBoardRow) as row, i}
-				<div class="row">
-					{#each Object.values(ChessBoardColumn) as column, j}
-						<Tile {row} rowNumber="{8 - i}" {column} columnLetter="{String.fromCharCode(65 + j)}" boardRect={rect}
-									class="tile" />
-					{/each}
-				</div>
+<div id="board-wrapper">
+	<div id="board-container" bind:this={container}>
+		<div id="board-boarder">
+			<div id="board">
+				{#each CHESS_BOARD_ROWS as row, i}
+					<div class="row">
+						{#each CHESS_BOARD_COLUMNS as column, j}
+							<Tile {row} rowNumber="{8 - i}" {column} columnLetter="{String.fromCharCode(65 + j)}" boardRect={rect}
+										class="tile" />
+						{/each}
+					</div>
+				{/each}
+			</div>
+		</div>
+	</div>
+	<div id="board-tools">
+		<div id="extra-piece-container">
+			{#each CHESS_PIECE_COLORS as color}
+				{#each CHESS_PIECE_TYPES as type}
+					<ExtraPiece {color} {type} />
+				{/each}
 			{/each}
 		</div>
 	</div>
@@ -35,6 +50,13 @@
 <svelte:window on:resize={onWindowResize} />
 
 <style>
+		#board-wrapper {
+				display: flex;
+				justify-content: center;
+				align-items: stretch;
+				flex-direction: row;
+		}
+
     #board-container {
         aspect-ratio: 1;
         width: calc(min(100vw, 100vh) - 40px);
@@ -146,4 +168,43 @@
         align-items: center;
         position: relative;
     }
+
+		#board-tools {
+				width: 400px;
+				margin: 20px;
+				border-radius: 8px;
+        background: linear-gradient(145deg, #f0d9b5, #b58863);
+    }
+
+		#extra-piece-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+		}
+
+		@media only screen and (max-width: 1340px) {
+				#board-tools {
+						width: 300px;
+				}
+		}
+
+		@media only screen and (max-width: 1080px) {
+				#board-tools {
+						width: 200px;
+				}
+		}
+
+		@media only screen and (max-width: 1000px) {
+				#board-wrapper {
+						flex-direction: column;
+				}
+
+				#board-tools {
+						width: calc(100% - 40px);
+				}
+
+        #extra-piece-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+        }
+		}
 </style>
