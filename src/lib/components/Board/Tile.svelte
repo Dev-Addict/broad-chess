@@ -1,9 +1,10 @@
 <script lang="ts">
+	import {onMount} from 'svelte';
+
 	import Piece from './Piece.svelte';
 	import {chessBoard, dragPiece, extraPiece} from '../../stores/chess-board.store.ts';
 	import type {ChessBoardRow} from '../../types/enum/chess-board-row.enum';
 	import type {ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
-	import {onMount} from 'svelte';
 
 	export let row: ChessBoardRow;
 	export let rowNumber: string;
@@ -24,6 +25,9 @@
 				chessBoard.movePiece($dragPiece, {row, column});
 			if ($extraPiece)
 				chessBoard.addPiece($extraPiece, {row, column});
+
+			dragPiece.set(null);
+			extraPiece.set(null);
 		}
 	}
 

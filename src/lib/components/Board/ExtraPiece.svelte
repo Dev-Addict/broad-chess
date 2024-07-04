@@ -24,7 +24,7 @@
 		e.preventDefault();
 
 		moving = true;
-		extraPiece.set({id: color[0] + type[0] + Date.now(), color, type});
+		extraPiece.set({id: color[0] + type[0] + Date.now(), color, type, moved: false});
 
 		left = e.clientX - (rect.left + rect.right) / 2;
 		top = e.clientY - (rect.top + rect.bottom) / 2;

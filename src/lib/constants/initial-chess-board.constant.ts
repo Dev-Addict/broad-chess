@@ -22,7 +22,10 @@ export const FIRST_ROW_PIECES = [
 ];
 
 export const INITIAL_CHESS_BOARD = ((): ChessBoard => {
-	const initialChessBoard: {[key: string]: any} = {};
+	const initialChessBoard: {[key: string]: any} = {
+		isGame: true,
+		turn: ChessPieceColor.WHITE,
+	};
 
 	for (const row of CHESS_BOARD_ROWS) {
 		initialChessBoard[row] = {};
@@ -36,11 +39,13 @@ export const INITIAL_CHESS_BOARD = ((): ChessBoard => {
 			id: `WP${column}`,
 			type: ChessPieceType.PAWN,
 			color: ChessPieceColor.WHITE,
+			moved: false,
 		};
 		initialChessBoard[ChessBoardRow.SEVEN][column].piece = {
 			id: `BP${column}`,
 			type: ChessPieceType.PAWN,
 			color: ChessPieceColor.BLACK,
+			moved: false,
 		};
 	}
 
@@ -53,6 +58,7 @@ export const INITIAL_CHESS_BOARD = ((): ChessBoard => {
 				id: `${color[0]}${CHESS_BOARD_COLUMNS[i][0]}${i}`,
 				type: FIRST_ROW_PIECES[i],
 				color,
+				moved: false,
 			};
 	}
 

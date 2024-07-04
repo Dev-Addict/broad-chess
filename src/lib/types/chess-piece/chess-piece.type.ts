@@ -5,4 +5,5 @@ export interface ChessPiece {
 	id: string;
 	type: ChessPieceType;
 	color: ChessPieceColor;
+	moved: boolean;
 }
