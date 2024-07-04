@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Piece from './Piece.svelte';
-	import {chessBoard, dragPiece} from '../../stores/chess-board.store.ts';
+	import {chessBoard, dragPiece, extraPiece} from '../../stores/chess-board.store.ts';
 	import type {ChessBoardRow} from '../../types/enum/chess-board-row.enum';
 	import type {ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
 	import {onMount} from 'svelte';
@@ -19,9 +19,12 @@
 	});
 
 	function onMouseUp(e: MouseEvent) {
-		if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom)
+		if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
 			if ($dragPiece)
 				chessBoard.movePiece($dragPiece, {row, column});
+			if ($extraPiece)
+				chessBoard.addPiece($extraPiece, {row, column});
+		}
 	}
 
 	function onWindowResize() {
