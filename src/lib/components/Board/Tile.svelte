@@ -3,6 +3,7 @@
 	import {chessBoard, dragPiece} from '../../stores/chess-board.store.ts';
 	import type {ChessBoardRow} from '../../types/enum/chess-board-row.enum';
 	import type {ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
+	import {onMount} from 'svelte';
 
 	export let row: ChessBoardRow;
 	export let rowNumber: string;
@@ -11,20 +12,27 @@
 	export let boardRect: DOMRect;
 
 	let tile: HTMLDivElement;
+	let rect: DOMRect;
+
+	onMount(() => {
+		rect = tile.getBoundingClientRect();
+	});
 
 	function onMouseUp(e: MouseEvent) {
-		const rect = tile.getBoundingClientRect();
-
 		if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom)
 			if ($dragPiece)
 				chessBoard.movePiece($dragPiece, {row, column});
+	}
+
+	function onWindowResize() {
+		rect = tile.getBoundingClientRect();
 	}
 </script>
 
 <div class="{$$props.class}" data-column="{columnLetter}" data-row="{rowNumber}" bind:this={tile}>
 	{#if $chessBoard[row][column].piece}
-		<Piece piece={$chessBoard[row][column].piece} {row} {column} {boardRect}/>
+		<Piece piece={$chessBoard[row][column].piece} {row} {column} {boardRect} />
 	{/if}
 </div>
 
-<svelte:window on:mouseup={onMouseUp}/>
+<svelte:window on:mouseup={onMouseUp} on:resize={onWindowResize} />

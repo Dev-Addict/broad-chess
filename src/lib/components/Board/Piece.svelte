@@ -60,6 +60,10 @@
 		left = 0;
 		top = 0;
 	}
+
+	function onWindowResize() {
+		rect = pieceElement.getBoundingClientRect();
+	}
 </script>
 
 <img on:mousedown={onMouseDown} src={CHESS_PIECE_IMAGES[piece.color][piece.type]}
@@ -67,7 +71,7 @@
 		 style="left: calc(50% {left < 0 ? '-' : '+'} {Math.abs(left)}px); top: calc(50% {top < 0 ? '-' : '+'} {Math.abs(top)}px); z-index: {moving ? 2 : 1};"
 		 bind:this={pieceElement} />
 
-<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
+<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} on:resize={onWindowResize} />
 
 <style>
     img {
