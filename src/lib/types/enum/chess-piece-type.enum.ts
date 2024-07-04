@@ -4,5 +4,7 @@ export enum ChessPieceType {
 	KNIGHT = 'KNIGHT',
 	BISHOP = 'BISHOP',
 	QUEEN = 'QUEEN',
-	KING = 'KING'
+	KING = 'KING',
 }
+
+export const CHESS_PIECE_TYPES = Object.values(ChessPieceType);
