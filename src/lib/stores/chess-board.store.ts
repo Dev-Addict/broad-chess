@@ -3,7 +3,6 @@ import {writable} from 'svelte/store';
 import {INITIAL_CHESS_BOARD} from '../constants/initial-chess-board.constant';
 import type {ChessBoard} from '../types/chess-board/chess-board.type';
 import type {ChessPiecePosition} from '../types/chess-piece/chess-piece-position.type';
-import type {ChessPieceType} from '../types/enum/chess-piece-type.enum';
 import type {ChessPiece} from '../types/chess-piece/chess-piece.type';
 
 function createChessBoard() {

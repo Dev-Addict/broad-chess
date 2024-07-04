@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {onMount} from 'svelte';
 
-	import {dragPiece, extraPiece} from '../../stores/chess-board.store';
+	import {extraPiece} from '../../stores/chess-board.store';
 	import {CHESS_PIECE_IMAGES} from '../../constants/chess-piece-images.constant';
 	import type {ChessPieceColor} from '../../types/enum/chess-piece-color.enum';
 	import type {ChessPieceType} from '../../types/enum/chess-piece-type.enum';

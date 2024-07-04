@@ -2,11 +2,10 @@
 	import {onMount} from 'svelte';
 
 	import Tile from './Tile.svelte';
-	import {CHESS_BOARD_ROWS, ChessBoardRow} from '../../types/enum/chess-board-row.enum';
-	import {CHESS_BOARD_COLUMNS, ChessBoardColumn} from '../../types/enum/chess-board-column.enum';
+	import {CHESS_BOARD_ROWS} from '../../types/enum/chess-board-row.enum';
+	import {CHESS_BOARD_COLUMNS} from '../../types/enum/chess-board-column.enum';
 	import {CHESS_PIECE_COLORS} from '../../types/enum/chess-piece-color.enum';
 	import {CHESS_PIECE_TYPES} from '../../types/enum/chess-piece-type.enum';
-	import Piece from './Piece.svelte';
 	import ExtraPiece from './ExtraPiece.svelte';
 
 	let container: HTMLDivElement;
