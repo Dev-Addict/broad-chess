@@ -2,6 +2,7 @@ import {getAvailablePawnMoves} from './get-available-pawn-moves.util';
 import {ChessPieceType} from '../../types/enum/chess-piece-type.enum';
 import type {ChessBoard} from '../../types/chess-board/chess-board.type';
 import type {ChessPiecePosition} from '../../types/chess-piece/chess-piece-position.type';
+import {getAvailableKnightMoves} from './get-available-knight-moves.util';
 
 export const getAvailableMoves = (
 	chessBoard: ChessBoard,
@@ -14,6 +15,8 @@ export const getAvailableMoves = (
 	switch (piece.type) {
 		case ChessPieceType.PAWN:
 			return getAvailablePawnMoves(chessBoard, position, piece);
+		case ChessPieceType.KNIGHT:
+			return getAvailableKnightMoves(chessBoard, position, piece);
 		default:
 			return [];
 	}
