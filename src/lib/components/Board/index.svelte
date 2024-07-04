@@ -11,6 +11,10 @@
 	onMount(() => {
 		rect = container.getBoundingClientRect();
 	});
+
+	function onWindowResize() {
+		rect = container.getBoundingClientRect();
+	}
 </script>
 
 <div id="board-container" bind:this={container}>
@@ -27,6 +31,8 @@
 		</div>
 	</div>
 </div>
+
+<svelte:window on:resize={onWindowResize} />
 
 <style>
     #board-container {
