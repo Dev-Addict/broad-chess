@@ -8,7 +8,6 @@ export const isMoveValid = (
 	to: ChessPiecePosition
 ): boolean => {
 	const availableMoves = getAvailableMoves(chessBoard, from);
-	console.log(availableMoves);
 
 	for (const availableMove of availableMoves)
 		if (availableMove.row === to.row && availableMove.column === to.column)
