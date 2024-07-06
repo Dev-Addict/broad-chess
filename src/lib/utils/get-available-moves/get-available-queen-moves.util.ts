@@ -1,4 +1,4 @@
-import {getAvailableDirectionalMoves} from './helpers/get-available-directional-moves.util';
+import {getAvailableDirectionalMoves} from './helpers/get-available-directional-moves.helper';
 import type {ChessBoard} from '../../types/chess-board/chess-board.type';
 import type {ChessPiecePosition} from '../../types/chess-piece/chess-piece-position.type';
 import type {ChessPiece} from '../../types/chess-piece/chess-piece.type';

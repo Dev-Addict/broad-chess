@@ -6,6 +6,7 @@ import {getAvailableQueenMoves} from './get-available-queen-moves.util';
 import {ChessPieceType} from '../../types/enum/chess-piece-type.enum';
 import type {ChessBoard} from '../../types/chess-board/chess-board.type';
 import type {ChessPiecePosition} from '../../types/chess-piece/chess-piece-position.type';
+import {getAvailableKingMoves} from './get-available-king-moves.util';
 
 export const getAvailableMoves = (
 	chessBoard: ChessBoard,
@@ -26,6 +27,8 @@ export const getAvailableMoves = (
 			return getAvailableRookMoves(chessBoard, position, piece);
 		case ChessPieceType.QUEEN:
 			return getAvailableQueenMoves(chessBoard, position, piece);
+		case ChessPieceType.KING:
+			return getAvailableKingMoves(chessBoard, position, piece);
 		default:
 			return [];
 	}
