@@ -7,6 +7,7 @@ import {ChessPieceType} from '../../types/enum/chess-piece-type.enum';
 import type {ChessBoard} from '../../types/chess-board/chess-board.type';
 import type {ChessPiecePosition} from '../../types/chess-piece/chess-piece-position.type';
 import {getAvailableKingMoves} from './get-available-king-moves.util';
+import {removeInvalidMoves} from './helpers/remove-invalid-moves.helper';
 
 export const getAvailableMoves = (
 	chessBoard: ChessBoard,
@@ -16,20 +17,30 @@ export const getAvailableMoves = (
 
 	if (!piece) return [];
 
+	let availableMoves: ChessPiecePosition[];
+
 	switch (piece.type) {
 		case ChessPieceType.PAWN:
-			return getAvailablePawnMoves(chessBoard, position, piece);
+			availableMoves = getAvailablePawnMoves(chessBoard, position, piece);
+			break;
 		case ChessPieceType.KNIGHT:
-			return getAvailableKnightMoves(chessBoard, position, piece);
+			availableMoves = getAvailableKnightMoves(chessBoard, position, piece);
+			break;
 		case ChessPieceType.BISHOP:
-			return getAvailableBishopMoves(chessBoard, position, piece);
+			availableMoves = getAvailableBishopMoves(chessBoard, position, piece);
+			break;
 		case ChessPieceType.ROOK:
-			return getAvailableRookMoves(chessBoard, position, piece);
+			availableMoves = getAvailableRookMoves(chessBoard, position, piece);
+			break;
 		case ChessPieceType.QUEEN:
-			return getAvailableQueenMoves(chessBoard, position, piece);
+			availableMoves = getAvailableQueenMoves(chessBoard, position, piece);
+			break;
 		case ChessPieceType.KING:
-			return getAvailableKingMoves(chessBoard, position, piece);
+			availableMoves = getAvailableKingMoves(chessBoard, position, piece);
+			break;
 		default:
-			return [];
+			availableMoves = [];
 	}
+
+	return removeInvalidMoves(chessBoard, availableMoves, position);
 };
